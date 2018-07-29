@@ -149,4 +149,4 @@ $.getJSON("data.json", function (people) {
         $("#suggested-friends").text(suggestedFriendsFinal);
                     
     });    
-    });
+});
