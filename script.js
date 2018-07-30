@@ -27,7 +27,7 @@ $.getJSON("data.json", function (people) {
                     
         $("#name").text(personName);
                     
-        //-----populate direct friends
+        //-----direct friends
                     
         var directFriends = [];
         var directFriendsIDs = [];
@@ -37,11 +37,13 @@ $.getJSON("data.json", function (people) {
             directFriends.push(people[personFriends[index] - 1].firstName);
             directFriendsIDs.push(people[personFriends[index] - 1].id);
             
+            //-----populate direct friends in HTML 
+            
             $("#friends").text(directFriends);
                         
         });
                     
-        //-----populate friends of friends(IDs)
+        //-----friends of friends
                         
         var friendsOfFriendsIDs = [];
                         
@@ -54,9 +56,7 @@ $.getJSON("data.json", function (people) {
                     friendsOfFriendsIDs.push(value.friends);
                     
                 } 
-                            
             });
-                        
         });
                     
         //-----convert friends of friends id's to names 
@@ -74,9 +74,7 @@ $.getJSON("data.json", function (people) {
                     friendsOfFriends.push(value.firstName);
                     
                 } 
-                            
             });
-
         }); 
                     
         //-----remove duplicates and chosen person name from friends of friends
@@ -98,6 +96,8 @@ $.getJSON("data.json", function (people) {
             if ($.inArray(el, directFriends) === -1) friendsOfFriendsFinal.push(el);
                         
         });
+        
+        //-----populate friends of friends in HTML 
                     
         $("#friends-of-friends").text(friendsOfFriendsFinal);
         
@@ -112,11 +112,11 @@ $.getJSON("data.json", function (people) {
                 
                 if ($.inArray(directFriendsIDs[i], element.friends) !== -1 && realPersonID !== el) {
                     
-                    //remove users with number of direct friends under 2
+                    //remove users with under 2 direct friends
                     
                     if (element.friends.length >= 2) {
                     
-                        //eliminate suggested friends who doesn't know 2 or more direct driends
+                        //eliminate suggested friends who doesn't know 2 or more direct friends
                         //code here--------------------------------------------------
 
                         suggestedFriends.push(element.firstName);
@@ -145,6 +145,8 @@ $.getJSON("data.json", function (people) {
             if ($.inArray(el, directFriends) == -1) suggestedFriendsFinal.push(el);
                         
         });
+        
+        //-----populate suggested friends in HTML 
         
         $("#suggested-friends").text(suggestedFriendsFinal);
                     
